@@ -1,14 +1,19 @@
 import React, { ReactNode } from "react";
 import Header from "./Header";
+import Squares from "./Squares";
+import Footer from "./Footer";
 
 type Props = {
   children: ReactNode;
 };
 
 const Layout: React.FC<Props> = (props) => (
-  <div>
+  <div className="h-screen">
     <Header />
+
     <div className="layout">{props.children}</div>
+
+    <Footer />
     <style jsx global>{`
       html {
         box-sizing: border-box;

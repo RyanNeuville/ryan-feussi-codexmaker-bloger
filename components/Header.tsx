@@ -11,7 +11,7 @@ const Header: React.FC = () => {
   let left = (
     <div className="left">
       <Link href="/" className="bold" data-active={isActive("/")}>
-        <span>Feed</span>
+        <span>codexmaker</span>
       </Link>
       <style jsx>{`
         .bold {
@@ -40,8 +40,8 @@ const Header: React.FC = () => {
   if (status === "loading") {
     left = (
       <div className="left">
-        <Link href="/" className="bold" data-active={isActive("/")}>
-          <span>Feed</span>
+        <Link href="/" className="bold btn btn-ghost btn-circle" data-active={isActive("/")}>
+          <span>codexmaker</span>
         </Link>
         <style jsx>{`
           .bold {
@@ -80,7 +80,7 @@ const Header: React.FC = () => {
     right = (
       <div className="right">
         <Link href="/api/auth/signin" data-active={isActive("/signup")}>
-          <span>Log in</span>
+          <span className="btn btn-primary">Log in</span>
         </Link>
         <style jsx>{`
           span {
@@ -109,14 +109,15 @@ const Header: React.FC = () => {
 
   if (session) {
     left = (
-      <div className="left">
-        <Link href="/">
-          <span className="bold" data-active={isActive("/")}>
-            Feed
+      <div className="left flex gap-2">
+        <Link href="/" className="btn btn-ghost">
+          <span className="bold mr-4 font-bold font-mono text-blue-500" data-active={isActive("/")}>
+            <span>codexmaker</span>
           </span>
+          
         </Link>
-        <Link href="/drafts">
-          <span data-active={isActive("/drafts")}>My drafts</span>
+        <Link href="/drafts" className="btn btn-active hover:btn-info transition-all">
+          <span data-active={isActive("/drafts")} className="font-mono">Mes brouillons</span>
         </Link>
         <style jsx>{`
           .bold {
@@ -125,12 +126,7 @@ const Header: React.FC = () => {
 
           span {
             text-decoration: none;
-            color: var(--geist-foreground);
             display: inline-block;
-          }
-
-          .left span[data-active="true"] {
-            color: gray;
           }
 
           span + span {
@@ -142,16 +138,17 @@ const Header: React.FC = () => {
 
     right = (
       <div className="right">
-        <p>
-          {session.user?.name} ({session.user?.email})
+        <p className=" text-sm md:text-md lg:text-lg text-white font-mono">
+          {session.user?.name} 
+          {/* ({session.user?.email}) */}
         </p>
         <Link href="/create">
           <button>
-            <span>New post</span>
+            <span className="btn btn-info">New post</span>
           </button>
         </Link>
         <button onClick={() => signOut()}>
-          <span>Log out</span>
+          <span className="btn btn-error mx-2">Log out</span>
         </button>
         <style jsx>{`
           span {
@@ -189,7 +186,7 @@ const Header: React.FC = () => {
   }
 
   return (
-    <nav>
+    <nav className="navbar bg-base-100/50 shadow-sm mb-20 fixed">
       {left}
       {right}
       <style jsx>{`

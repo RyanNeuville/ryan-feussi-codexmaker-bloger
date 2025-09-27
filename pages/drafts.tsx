@@ -51,8 +51,15 @@ const Drafts: React.FC<Props> = (props) => {
 
   return (
     <Layout>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="page">
-        <h1>My Drafts</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-blue-600 mb-2">My Drafts</h1>
         <main>
           {props.drafts.map((post) => (
             <div key={post.id} className="post">

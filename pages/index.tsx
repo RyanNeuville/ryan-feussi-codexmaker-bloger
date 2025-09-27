@@ -4,6 +4,10 @@ import Layout from "../components/Layout";
 import Post, { PostProps } from "../components/Post";
 import prisma from "../lib/prisma";
 
+import Squares from "../components/Squares";
+import Galaxy from "../components/Galaxy";
+import Grid from "../components/Grid";
+
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.post.findMany({
     where: { published: true },
@@ -28,14 +32,18 @@ const Blog: React.FC<Props> = (props) => {
   return (
     <Layout>
       <div className="page">
-        <h1>Public Feed</h1>
-        <main>
-          {props.feed.map((post) => (
-            <div key={post.id} className="post">
-              <Post post={post} />
-            </div>
-          ))}
-        </main>
+        <div className="mb-20"><br /><br /><br /><br /><br />
+          <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-blue-600 mb-2">
+            Publications
+          </h1>
+          <main>
+            {props.feed.map((post) => (
+              <div key={post.id} className="post">
+                <Post post={post} />
+              </div>
+            ))}
+          </main>
+        </div>
       </div>
       <style jsx>{`
         .post {

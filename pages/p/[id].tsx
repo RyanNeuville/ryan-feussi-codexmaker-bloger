@@ -58,6 +58,12 @@ const Post: React.FC<PostProps> = (props) => {
 
   return (
     <Layout>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div>
         <h2>{title}</h2>
         <p>By {props?.author?.name || "Unknown author"}</p>
