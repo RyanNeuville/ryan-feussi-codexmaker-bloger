@@ -1,8 +1,14 @@
 module.exports = {
   images: {
     remotePatterns: [
-      new URL("https://e7.pngegg.com/**"),
-      new URL("https://avatars.githubusercontent.com/**"),
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        port: "",
+        pathname: "/u/**",
+        search: "",
+      },
+      new URL('https://e7.pngegg.com/**')
     ],
   },
 };

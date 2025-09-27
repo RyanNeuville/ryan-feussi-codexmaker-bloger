@@ -32,16 +32,23 @@ const Blog: React.FC<Props> = (props) => {
   return (
     <Layout>
       <div className="page">
-        <div className="mb-20"><br /><br /><br /><br /><br />
+        <div className="mb-20">
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-blue-600 mb-2">
             Publications
           </h1>
           <main>
-            {props.feed.map((post) => (
-              <div key={post.id} className="post">
-                <Post post={post} />
-              </div>
-            ))}
+            <div className="grid md:grid-cols-1 lg:grid-cols-2 items-center justify-center gap-4">
+              {props.feed.map((post) => (
+                <div key={post.id} className="post rounded-md">
+                  <Post post={post} />
+                </div>
+              ))}
+            </div>
           </main>
         </div>
       </div>
@@ -53,10 +60,6 @@ const Blog: React.FC<Props> = (props) => {
 
         .post:hover {
           box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .post + .post {
-          margin-top: 2rem;
         }
       `}</style>
     </Layout>
