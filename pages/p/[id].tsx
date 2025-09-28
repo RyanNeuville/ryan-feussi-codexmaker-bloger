@@ -65,14 +65,15 @@ const Post: React.FC<PostProps> = (props) => {
       <br />
       <br />
       <div>
-        <h2>{title}</h2>
-        <p>By {props?.author?.name || "Unknown author"}</p>
+        <h2 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-blue-600 mb-2">{title}</h2>
+        <p><span className="font-mono font-bold">Auteur: </span> <span className="text-sm font-bold text-gray-600">{props?.author?.name || "Unknown author"}</span></p>
+        <br />
         <ReactMarkdown children={props.content} />
         {!props.published && userHasValidSession && postBelongsToUser && (
           <button onClick={() => publishPost(props.id)}>Publish</button>
         )}
         {userHasValidSession && postBelongsToUser && (
-          <button onClick={() => deletePost(props.id)}>Delete</button>
+          <button className="btn btn-error my-4" onClick={() => deletePost(props.id)}>Delete</button>
         )}
       </div>
       <style jsx>{`
@@ -83,17 +84,6 @@ const Post: React.FC<PostProps> = (props) => {
 
         .actions {
           margin-top: 2rem;
-        }
-
-        button {
-          background: #ececec;
-          border: 0;
-          border-radius: 0.125rem;
-          padding: 1rem 2rem;
-        }
-
-        button + button {
-          margin-left: 1rem;
         }
       `}</style>
     </Layout>
