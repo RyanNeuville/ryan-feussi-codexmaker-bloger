@@ -53,7 +53,7 @@ const Post: React.FC<PostProps> = (props) => {
   const postBelongsToUser = session?.user?.email === props.author?.email;
   let title = props.title;
   if (!props.published) {
-    title = `${title} (Draft)`;
+    title = `${title} (Brouillons)`;
   }
 
   return (
@@ -70,10 +70,10 @@ const Post: React.FC<PostProps> = (props) => {
         <br />
         <ReactMarkdown children={props.content} />
         {!props.published && userHasValidSession && postBelongsToUser && (
-          <button onClick={() => publishPost(props.id)}>Publish</button>
+          <button className="btn btn-info mr-4" onClick={() => publishPost(props.id)}>Publier</button>
         )}
         {userHasValidSession && postBelongsToUser && (
-          <button className="btn btn-error my-4" onClick={() => deletePost(props.id)}>Delete</button>
+          <button className="btn btn-error my-4" onClick={() => deletePost(props.id)}>Supprimer</button>
         )}
       </div>
       <style jsx>{`

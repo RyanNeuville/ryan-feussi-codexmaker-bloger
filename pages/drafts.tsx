@@ -43,7 +43,7 @@ const Drafts: React.FC<Props> = (props) => {
   if (!session) {
     return (
       <Layout>
-        <h1>My Drafts</h1>
+        <h1>Mes Brouillons</h1>
         <div>You need to be authenticated to view this page.</div>
       </Layout>
     );
@@ -59,7 +59,7 @@ const Drafts: React.FC<Props> = (props) => {
       <br />
       <br />
       <div className="page">
-        <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-blue-600 mb-2">My Drafts</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-blue-600 mb-2">Mes Brouillons</h1>
         <main>
           {props.drafts.map((post) => (
             <div key={post.id} className="post">
