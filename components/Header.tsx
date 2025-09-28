@@ -124,7 +124,7 @@ const Header: React.FC = () => {
         </Link>
         <Link
           href="/drafts"
-          className="btn btn-active hover:btn-info transition-all"
+          className="btn btn-active hover:btn-info transition-all fixed bottom-4 right-4"
         >
           <span data-active={isActive("/drafts")} className="font-mono">
             Mes brouillons
@@ -154,7 +154,7 @@ const Header: React.FC = () => {
           {/* ({session.user?.email}) */}
         </p>
         <Link href="/create">
-          <button  className="btn btn-info">
+          <button className="btn btn-info">
             <span>Nouveau post</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -187,16 +187,6 @@ const Header: React.FC = () => {
             margin-left: 1rem;
           }
 
-          .right {
-            margin-left: auto;
-          }
-
-          .right span {
-            border: 1px solid var(--geist-foreground);
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-          }
-
           button {
             border: none;
           }
@@ -207,12 +197,11 @@ const Header: React.FC = () => {
 
   return (
     <nav className="navbar bg-base-100/50 shadow-sm mb-20 fixed">
-      {left}
-      {right}
+      <div className={"navbar-start"}>{left}</div>
+      <div className={"navbar-end"}>{right}</div>
       <style jsx>{`
         nav {
           display: flex;
-          padding: 2rem;
           align-items: center;
         }
       `}</style>
