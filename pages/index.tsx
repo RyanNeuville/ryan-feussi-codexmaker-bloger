@@ -18,8 +18,14 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   });
 
+  // convertir les Dates en string
+  const serializedFeed = feed.map((post) => ({
+    ...post,
+    createdAt: post.createdAt.toISOString(),
+  }));
+
   return {
-    props: { feed },
+    props: { feed: serializedFeed },
     revalidate: 10,
   };
 };

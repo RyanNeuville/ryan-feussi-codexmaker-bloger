@@ -13,7 +13,7 @@ export type PostProps = {
   } | null;
   content: string;
   published: boolean;
-  createAt: string;
+  createdAt: string;
 };
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
@@ -50,6 +50,15 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
         ></Image>
         <div className="flex flex-col">
           <span className="font-mono font-bold">{authorName}</span>
+          <span>
+            {new Date(post.createdAt).toLocaleString("fr-FR", {
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </span>
         </div>
       </div>
       <div className="mt-4">
