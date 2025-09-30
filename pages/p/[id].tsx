@@ -27,10 +27,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   return {
     props: {
-      post: {
-        ...post,
-        createdAt: post.createdAt.toISOString(), 
-      },
+      post: JSON.parse(JSON.stringify(post)),
     },
   };
 };
@@ -49,19 +46,20 @@ async function publishPost(id: string): Promise<void> {
   await Router.push("/");
 }
 
-const Post: React.FC<PostProps> = (props) => {
+const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const { data: session, status } = useSession();
+
   if (status === "loading") {
     return <div>Authenticating ...</div>;
   }
+
   const userHasValidSession = Boolean(session);
-  const postBelongsToUser = session?.user?.email === props.author?.email;
-  let title = props.title;
-  if (!props.published) {
+  const postBelongsToUser = session?.user?.email === post.author?.email;
+
+  let title = post.title;
+  if (!post.published) {
     title = `${title} (Brouillons)`;
   }
-
-  
 
   return (
     <Layout>
@@ -77,15 +75,16 @@ const Post: React.FC<PostProps> = (props) => {
         <p>
           <span className="font-mono font-bold">Auteur: </span>{" "}
           <span className="text-sm font-bold text-gray-600">
-            {props?.author?.name || "Unknown author"}
+            {post?.author?.name || "Unknown author"}
           </span>
         </p>
         <br />
-        <ReactMarkdown children={props.content} />
-        {!props.published && userHasValidSession && postBelongsToUser && (
+        <ReactMarkdown>{post.content}</ReactMarkdown>
+
+        {!post.published && userHasValidSession && postBelongsToUser && (
           <button
             className="btn btn-info mr-4"
-            onClick={() => publishPost(props.id)}
+            onClick={() => publishPost(post.id)}
           >
             Publier
           </button>
@@ -93,22 +92,12 @@ const Post: React.FC<PostProps> = (props) => {
         {userHasValidSession && postBelongsToUser && (
           <button
             className="btn btn-error my-4"
-            onClick={() => deletePost(props.id)}
+            onClick={() => deletePost(post.id)}
           >
             Supprimer
           </button>
         )}
       </div>
-      <style jsx>{`
-        .page {
-          background: var(--geist-background);
-          padding: 2rem;
-        }
-
-        .actions {
-          margin-top: 2rem;
-        }
-      `}</style>
     </Layout>
   );
 };
