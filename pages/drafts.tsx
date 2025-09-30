@@ -29,7 +29,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     },
   });
   return {
-    props: { drafts },
+    props: { drafts: drafts.map(draft => ({
+      ...draft,
+      createdAt: draft.createdAt.toISOString()
+    })) },
   };
 };
 

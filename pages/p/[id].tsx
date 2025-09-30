@@ -26,7 +26,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
 
   return {
-    props: post,
+    props: {
+      post: {
+        ...post,
+        createdAt: post.createdAt.toISOString(), 
+      },
+    },
   };
 };
 
@@ -56,24 +61,42 @@ const Post: React.FC<PostProps> = (props) => {
     title = `${title} (Brouillons)`;
   }
 
+  
+
   return (
     <Layout>
-
       <br />
       <br />
       <br />
       <br />
       <br />
       <div>
-        <h2 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-blue-600 mb-2">{title}</h2>
-        <p><span className="font-mono font-bold">Auteur: </span> <span className="text-sm font-bold text-gray-600">{props?.author?.name || "Unknown author"}</span></p>
+        <h2 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-blue-600 mb-2">
+          {title}
+        </h2>
+        <p>
+          <span className="font-mono font-bold">Auteur: </span>{" "}
+          <span className="text-sm font-bold text-gray-600">
+            {props?.author?.name || "Unknown author"}
+          </span>
+        </p>
         <br />
         <ReactMarkdown children={props.content} />
         {!props.published && userHasValidSession && postBelongsToUser && (
-          <button className="btn btn-info mr-4" onClick={() => publishPost(props.id)}>Publier</button>
+          <button
+            className="btn btn-info mr-4"
+            onClick={() => publishPost(props.id)}
+          >
+            Publier
+          </button>
         )}
         {userHasValidSession && postBelongsToUser && (
-          <button className="btn btn-error my-4" onClick={() => deletePost(props.id)}>Supprimer</button>
+          <button
+            className="btn btn-error my-4"
+            onClick={() => deletePost(props.id)}
+          >
+            Supprimer
+          </button>
         )}
       </div>
       <style jsx>{`
